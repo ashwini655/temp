@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ragistration form</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+#formDiv {
+    max-width: 400px;
+    margin: auto;
+    background: #29c7c9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.fonm-control {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.er {
+    color: red;
+    font-size: 12px;
+    height: 15px; /* Fixed height for consistent spacing */
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+</style>
+<body>
+    <div id="formDiv">
+
+        <form id="myForm" >
+            <h1>Ragistration Form</h1>
+            <div class="fonm-control">
+                <label>Full Name</label>
+                <input type="text" id="name" placeholder="Enter name" />
+                <p class="er" id="name_err"></p>
+            </div>
+
+            <div class="fonm-control">
+                <label>Contact No.</label>
+                <input type="text" id="number" placeholder="Enter Contact number" />
+                <p class="er" id="cont_err"></p>
+            </div>
+
+            <div class="fonm-control">
+                <label>Email</label>
+                <input type="text" id="eamil" placeholder="Enter Email" />
+                <p class="er" id="email_err"></p>
+            </div>
+            <div class="fonm-control">
+                <label>Password</label>
+                <input type="text" id="Password" placeholder="Enter Password">
+                <p class="er" id="Password_err"></p>
+            </div>
+
+            <div class="fonm-control">
+                <label>Confirm Password</label>
+                <input type="text" id="Confirm" placeholder="Enter Confirm Password">
+                <p class="er" id="Confirm_err"></p>
+            </div>
+
+            <div class="fonm-control">
+                <label>Address</label>
+                <input type="text" id="address" placeholder="Enter Address">
+                <p class="er" id="address_err"></p>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+<script>
+      const form =document.querySelector('#myForm');
+
+form.onsubmit=function(){
+    let isValid=true;
+
+    let name=document.getElementById('name').value;
+    let name_error=document.getElementById('name_err');
+
+    const name_regex= /^[A-Za-z\s]{2,15}$/;
+
+    if(name==''){
+        name_error.innerHTML="Name cannot be empty";
+        isValid =false;
+    }else if(!name_regex.test(name)){
+        name_error.innerHTML="Number not allowed"
+        isValid =false
+    }
+
+    let number=document.getElementById('number').value;
+    let num_err=document.getElementById('cont_err');
+
+    const num_regex=/^\d{10}$/
+
+    if(number==''){
+        num_err.innerHTML="Enter number";
+        isValid =false
+
+    }else if(!num_regex.test(number)){
+        num_err.innerHTML="Number Should be 10 digit";
+        isValid =false
+
+    }
+
+let eamil=document.getElementById("eamil").value;  //email field
+let email_err=document.getElementById("email_err");      //p tag
+ 
+const email_regex=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+
+if(eamil==''){
+    email_err.innerHTML="Email cannot be empty";
+    isValid =false;
+}else if(!email_regex.test(email)){
+email_err.innerHTML="email should be have a proper format";
+isValid =false
+}
+
+let password=document.getElementById("Password").value;
+let password_err=document.getElementById("Password_err");
+
+const password_regex=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*)/
+if(password==''){
+    password_err.innerHTML="Password cannot be empty";
+    isValid=false;
+} else if(!password_regex.test(Password)){
+    password_err.innerHTML="Password should have at least one uppercase letter, one lowercase letter, and one specil character";
+    isValid=false;
+}
+
+let Confirm=document.getElementById("Confirm").value;
+let Confirm_err=document.getElementById("Confirm_err");
+
+// here regex validation code
+const Confirm_regex=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*)/
+
+if(Confirm==''){
+    Confirm_err.innerHTML="Confirm password cannot be empty";
+    isValid=false;
+} else if(!password_regex.test(password)){
+    Confirm_err.innerHTML="Confirm password should have to same like password";
+    isvalid=false;
+
+}
+
+
+let address=document.getElementById("address").value;
+let address_err=document.getElementById("address_err");
+// here regex validation code
+const address_regex=/^\d+\s[A-z]+\s[A-z]+(,\s[A-z]+\s[A-z]+)*,?\s[A-z]{2}\s\d{5}(-\d{4})?$/
+
+if(address==''){
+    address_err.innerHTML="Address cannot be empty";
+    isValid=false;
+ }
+        else if(!address_regex.test(address)){
+        address_err.innerHTML="Address should be in the format of 123 Main St, Anytown, street and area name";
+        isValid=false;
+        }
+ 
+
+
+
+
+    if(!isValid){
+        alert("form submited");
+    }
+   
+
+    return isValid;
+
+
+}
+
+
+</script>
+</html>
